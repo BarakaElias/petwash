@@ -15,18 +15,17 @@ class SubmitBookController extends Controller
 		function submit(Request $req){
 			$username = 'ecdc900c850aab57';
 			$password = 'OTA4OTY4OWJhNDU0OWY4ODFhNjMwMDg4MzQzNWU3MDQwNDEyNDBlODNlNGFlYzY3MmMyOTJiMWIzNzNkN2RiNA==';
-			$no = rand(10000,99999);
-			$sno = strval($no);
-			$referenceno = 'BWP-'.$sno;
+			$no = rand(10000,99999); //gets random number
+			$sno = strval($no);//changes to string
+			$referenceno = 'BWP-'.$sno;//attaches random number to reference number prefix
 
-				//96f9cc09-afa0-40cf-928a-d7e2b27b2408
-			// $uid1 = strval(rand(1001,9999));
-			// $uid2 = strval(rand(1001,9999));
-			//
+
+			//this request gets a uuid from an api
 			$rep = Http::get('https://www.uuidtools.com/api/generate/v1');
 			$body = $rep->json();
 			$uuid = $body[0];
 
+					//posts data to the database
 					$myorder = new Order;
 					$myorder->owner_name = $req->owner_name;
 					$myorder->pet = $req->pettype;
@@ -39,14 +38,14 @@ class SubmitBookController extends Controller
 					$myorder->referenceNumber = $referenceno;
 					$myorder->save();
 
-					$amount = '10000';
+					$amount = '10000'; //for small animals
 
 					if($req->pettype === 'dog'){
 							$amount = '20000';
 					}
 
 
-					//beem api
+					//call to the beem api
 					$response = Http::withBasicAuth($username,$password)->get('https://checkout.beem.africa/v1/checkout',[
 						'amount' => $amount,
 						'transaction_id' => $uuid,
@@ -55,11 +54,11 @@ class SubmitBookController extends Controller
 						'sendSource' => 'true'
 					]);
 
-
+						//if succeeds
 					if(isset($response['src'])){
 						return redirect($response['src']);
 					}
-
+						//if it fails
 						return redirect('booksuccess');
 
 

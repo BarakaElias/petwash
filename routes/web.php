@@ -22,10 +22,18 @@ Route::get('/', function () {
 });
 Route::view('/home','welcome');
 
-Route::get('/mypanel',[listOrderController::class, 'show']);
+Route::get('/mypanel',[listOrderController::class, 'show'])->middleware('protectedPage');
 
 Route::post('/submitbook',[SubmitBookController::class, 'submit']);
 Route::view('/booksuccess','success');
 
 Route::post('/callback',[BeemController::class]);
 Route::get('complete/{id}',[FulfilledController::class,'mark_complete']);
+
+Route::view('/admin','admin');
+
+Route::post('requestotp',[BeemController::class,'getotp']);
+
+Route::view('verify','verify');
+
+Route::post('verifyotp',[BeemController::class, 'verifyotp']);
