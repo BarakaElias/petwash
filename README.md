@@ -1,62 +1,114 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+## About Petwash
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Petwash is a pet grooming service. Customers submit their bookings online and take their pets to one of our stations.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+When an order is marked as complete, an sms will be sent to the customer
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Note
 
-## Learning Laravel
+1. Petwash website was created for the main purpose of showcasing how the beem checkout api functions. It shows how the api can be intergrated in a similar service webapp or e commerce site.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. At time of submission, the callback url in the payment checkout route had not been updated to http://petwash.rf.gd/callback
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Description
+This fits the challenge theme by showing the possiblity that a business can have an endpoint on the internet that can facilitate quick inquiry and transactions thus providing less interaction. Moreover, gives the customer more choices on how to pay for the service or product he requires.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## API used
 
-### Premium Partners
+1. PAYMENT CHECKOUT
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+2. SMS 
 
-## Contributing
+Method: Redirect
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+On the booking form the user is requested to give his phone number and is prompted that the provided phone number will be used to process the payment
 
-## Code of Conduct
+## Framework
+Laravel 8
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Depolyment notice
 
-## Security Vulnerabilities
+index.php and htaccess have been moved outside of the public folder so as to remove the /public from the localhost url so,
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+in a local environment use the url localhost/foldername Eg.localhost/petwash
 
-## License
+## Database Table
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Only has a single table
+
+### Table name
+
+orders
+
+### Table columns
+
+order_id  INT   NOT NULL
+
+owner_name      VARCHAR   NOT NULL
+
+pet      VARCHAR     NOT NULL
+
+order_date       VARCHAR    NOT NULL
+
+owner_email     VARCHAR NULL
+
+owner_phone      VARCHAR     NOT NULL
+
+owner_note      TEXT        NULL
+
+owner_paid      VARCHAR     NOT NULL
+
+transactionID       TEXT        NULL
+
+referenceNumber     TEXT        NULL
+
+### Controllers
+BeemController - this handles the callback url
+
+FulffilledController - this spins to action when the admin marks an order as completed, it then removes the order from the order list
+
+listOrderController - to list all the orders
+
+SubmitBookController - for submitting the form and handling payment
+
+## How payment handling is done
+The SubmitBookController contains the code that calls to the beem api. It first generates a reference number with the prefix 'BWP' then gets a uuid from a free api. It then gets the customers number from the form details then on a succesful api call, the customer is redirected to the beem checkout page.
+
+The amount to be paid
+
+- For dog: 20,000/-
+
+- For small animals: 10,000/-
+
+- This is set in SubmitBookController
+
+
+
+
+### callback
+When callback is received at http://petwash.rf.gd/callback it triggers BeemController to get the order with  the returned reference number and set the order to 'yes' meaning payment has been made.
+
+## Website
+- [Visit Petwash website](http://petwash.rf.gd/).
+
+When typing the url manually, Please add / after .gd inorder to load the website otherwise it will direct to infinity free landing page Eg.http://petwash.rf.gd/
+
+
+### Website Navigation
+Home  - the homepage
+
+Orders  - shows all the orders made
+
+## Participants
+
+Name: Baraka Elias Urio
+
+Email: barakaurio@yahoo.com
+
+
+
+## Purpose
+For the beemathon challenge 2021
