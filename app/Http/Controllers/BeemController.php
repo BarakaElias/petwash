@@ -11,16 +11,18 @@ use Illuminate\Support\Facades\Http;
 
 class BeemController extends Controller
 {
-    //
+    //HANDLE CALLBACK FROM PAYMENT CHECKOUT API
 		function index(Request $req){
 			$referenceNumber = $req->input('referenceNumber');
-			// $transactionID = $req->input('transactionID');
-
 			$data = DB::table('orders')->where('referenceNumber',$referenceNumber)->update(['order_paid'=>'yes']);
-
-			// return redirect('allorders');
 		}
 
+
+
+
+
+
+		//REQUEST TO GET PINCODE
 
 		function getotp(Request $req){
 		  $phone = $req->admin_phone;
@@ -47,6 +49,12 @@ class BeemController extends Controller
 		}
 
 
+
+
+
+
+		//TO VERIFY OTP
+
 		function verifyotp(Request $req){
 
 			$username = 'b1d2218977b5d109';
@@ -65,11 +73,7 @@ class BeemController extends Controller
 				$req->session()->put('user','admin');
 					return redirect('mypanel');
 			}
-
 			return redirect('verify');//if not vallid
-
-
-
 		}
 
 }

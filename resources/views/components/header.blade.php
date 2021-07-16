@@ -12,6 +12,11 @@
         <li class="nav-item">
           <a class="nav-link" href="mypanel">Orders</a>
         </li>
+				@if(session()->has('user'))
+				<li class="nav-item">
+          <a class="nav-link" href="logout">Logout</a>
+        </li>
+				@endif
       </ul>
     </div>
   </div>

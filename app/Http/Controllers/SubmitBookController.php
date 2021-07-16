@@ -11,7 +11,7 @@ class SubmitBookController extends Controller
 {
 
 
-    //
+    //TO MAKE THE PAYMENT VIA REDIRECT
 		function submit(Request $req){
 			$username = 'ecdc900c850aab57';
 			$password = 'OTA4OTY4OWJhNDU0OWY4ODFhNjMwMDg4MzQzNWU3MDQwNDEyNDBlODNlNGFlYzY3MmMyOTJiMWIzNzNkN2RiNA==';
