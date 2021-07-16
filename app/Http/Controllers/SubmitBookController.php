@@ -13,8 +13,8 @@ class SubmitBookController extends Controller
 
     //TO MAKE THE PAYMENT VIA REDIRECT
 		function submit(Request $req){
-			$username = 'ecdc900c850aab57';
-			$password = 'OTA4OTY4OWJhNDU0OWY4ODFhNjMwMDg4MzQzNWU3MDQwNDEyNDBlODNlNGFlYzY3MmMyOTJiMWIzNzNkN2RiNA==';
+			$username = 'enter api key';
+			$password = 'enter secret key';
 			$no = rand(10000,99999); //gets random number
 			$sno = strval($no);//changes to string
 			$referenceno = 'BWP-'.$sno;//attaches random number to reference number prefix

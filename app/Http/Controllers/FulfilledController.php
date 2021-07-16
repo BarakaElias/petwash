@@ -15,8 +15,8 @@ class FulfilledController extends Controller
 
 								$data = DB::table('orders')->where('order_id',$order_id)->first();
 
-								$username = '3f995b9eff643b85';
-								$password = 'MzVlNGEyMWFjZjE4ZmM3NGQ3ODg0YzdhZjJlZDAyZTVhOWQ1NjAyMjBkNTZiNmNmMDE1OTg4NGVhZjI1NWIyZA==';
+								$username = 'enter api key';
+								$password = 'enter secret key';
 
 								$rec_id = rand(10000,99999);
 								$id = strval($rec_id);

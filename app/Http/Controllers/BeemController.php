@@ -31,8 +31,8 @@ class BeemController extends Controller
 		function getotp(Request $req){
 		  $phone = $req->admin_phone;
 
-			$username = 'b1d2218977b5d109';
-			$password = 'OTFmMWViOGQ4MDQ2YmRhN2U3YzVlZDlmZmU0NjE3MTEwYWMxZWY5MjI1YWEzYmY5NTQ3ZGFlZjRmNDllMzE0Yg==';
+			$username = 'enter api key';
+			$password = 'enter secret key';
 
 			$response = Http::withBasicAuth($username,$password)->post('https://apiotp.beem.africa/v1/request',[
 				"appId" => 206,
@@ -61,8 +61,8 @@ class BeemController extends Controller
 
 		function verifyotp(Request $req){
 
-			$username = 'b1d2218977b5d109';
-			$password = 'OTFmMWViOGQ4MDQ2YmRhN2U3YzVlZDlmZmU0NjE3MTEwYWMxZWY5MjI1YWEzYmY5NTQ3ZGFlZjRmNDllMzE0Yg==';
+			$username = 'enter api key';
+			$password = 'enter secret key';
 
 			$code = $req->code;
 			$response = Http::withBasicAuth($username,$password)->post('https://apiotp.beem.africa/v1/verify',[
