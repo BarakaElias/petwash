@@ -22,6 +22,8 @@ This fits the challenge theme by showing the possiblity that a business can have
 
 2. SMS 
 
+3. OTP
+
 Method: Redirect
 
 On the booking form the user is requested to give his phone number and is prompted that the provided phone number will be used to process the payment
@@ -66,7 +68,7 @@ transactionID       TEXT        NULL
 referenceNumber     TEXT        NULL
 
 ### Controllers
-BeemController - this handles the callback url
+BeemController - this handles the callback url, handles otp requests 
 
 FulffilledController - this spins to action when the admin marks an order as completed, it then removes the order from the order list
 
