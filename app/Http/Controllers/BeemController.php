@@ -14,7 +14,7 @@ class BeemController extends Controller
     //HANDLE CALLBACK FROM PAYMENT CHECKOUT API
 		function index(Request $req){
 			$referenceNumber = $req->input('referenceNumber');
-			$status = $req->input('status');
+			$status = $req->boolean('status');
 			if($status){
 				$data = DB::table('orders')->where('referenceNumber',$referenceNumber)->update(['order_paid'=>'yes']);
 			}
