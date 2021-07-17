@@ -10,7 +10,6 @@ When an order is marked as complete, an sms will be sent to the customer
 
 1. Petwash website was created for the main purpose of showcasing how the beem checkout api functions. It shows how the api can be intergrated in a similar service webapp or e commerce site.
 
-2. At time of submission, the callback url in the payment checkout route had not been updated to http://petwash.rf.gd/callback
 
 ## Description
 This fits the challenge theme by showing the possiblity that a business can have an endpoint on the internet that can facilitate quick inquiry and transactions thus providing less interaction. Moreover, gives the customer more choices on how to pay for the service or product he requires.
