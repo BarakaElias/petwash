@@ -9,6 +9,9 @@ When an order is marked as complete, an sms will be sent to the customer
 ## Note
 
 1. Petwash website was created for the main purpose of showcasing how the beem checkout api functions. It shows how the api can be intergrated in a similar service webapp or e commerce site.
+2. Do not include + sign when typing your phone number 
+3. Phone numbers start with 255
+4. Eg. 255624XXXXX
 
 
 ## Description
